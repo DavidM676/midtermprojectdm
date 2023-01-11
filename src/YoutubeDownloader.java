@@ -8,7 +8,9 @@ public class YoutubeDownloader {
         ProcessBuilder p = new ProcessBuilder();
         p.command (
                 "src/yt-dlp"+os,
-                url
+
+                url,
+                "-o vid.mp4"
 
             );
         try {
