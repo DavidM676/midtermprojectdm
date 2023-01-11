@@ -1,43 +1,32 @@
-import java.io.*;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String url ="https://www.youtube.com/watch?v=LXb3EKWsInQ";
-        ProcessBuilder p = new ProcessBuilder();
-        p.command (
-                "C:\\Users\\student\\IdeaProjects\\midtermprojectdm\\src\\yt-dlp_x86.exe ",
-                 url,// also works with "youtube-dl"
-                "/c", "dir C:\\Users\\student/Downloads"
-        );
-        try {
+        Scanner scan = new Scanner(System.in);
 
-            Process process = p.start();
+        System.out.println("Welcome to the MidTerm project");
+        System.out.println("Would you like to use a video link(1, default) or a already downloaded video(2): ");
 
-            StringBuilder output = new StringBuilder();
-
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
-            }
-
-            int exitVal = process.waitFor();
-            if (exitVal == 0) {
-                System.out.println("Success!");
-                System.out.println(output);
-                System.exit(0);
-            } else {
-                //abnormal...
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (scan.nextLine().equals("2")) {
+            System.out.println("Enter Video Path");
+        } else {
+            System.out.println("Enter a video url: ");
+            String url = scan.nextLine();
+            YoutubeDownloader.Download(url, getOs());
         }
 
+    }
+
+
+
+
+    public static String getOs() {
+        String os = (System.getProperty("os.name")).toLowerCase(Locale.ROOT);
+        if (os.contains("windows")) {
+            return ".exe";
+        }
+        return "";
 
     }
 }
