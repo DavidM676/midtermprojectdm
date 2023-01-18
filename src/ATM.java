@@ -114,17 +114,24 @@ public class ATM {
 
     }
 
-    private void withdraw() {
+    private boolean withdraw() {
         System.out.println("Which account would you like to withdraw from: "+c.getAccountsString());
         int account = scan.nextInt();
-        Account.types t = c.getAccounts()[account].getType();
+        Account.types acc = c.getAccounts()[account].getType();
 
         System.out.print("Enter amount to withdraw: ");
         int amount = scan.nextInt();
 
 
         if (!(validAmount(amount))) {
-            break;
+            return false;
+        }
+
+
+        if (c.withdraw(amount, acc)) {
+            System.out.println("Withdraw successful");
+        } else {
+            System.out.println("Withdraw failed");
         }
 
 
