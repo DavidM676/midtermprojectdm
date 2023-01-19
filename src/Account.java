@@ -13,8 +13,12 @@ public class Account {
         acc = type;
     }
 
-    public void withdraw(int amount) {
-        balence -= amount;
+    public boolean withdraw(int amount) {
+        if (!(amount>balence)) {
+            balence -= amount;
+            return true;
+        }
+        return false;
     }
 
     public int getBalance() {

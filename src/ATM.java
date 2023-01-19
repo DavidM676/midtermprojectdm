@@ -21,15 +21,13 @@ public class ATM {
 
         users[0] = new Customer(pin, name);
 
+        while (!(authenticate()));
 
-        if (authenticate()) {
-            while (true) {
-                mainMenu();
-            }
+        mainMenu();
 
-        } else {
-            System.out.println("incorrect pin");
-        }
+//        } else {
+//            System.out.println("incorrect pin");
+//        }
     }
 
 
@@ -83,6 +81,7 @@ public class ATM {
                 return true;
             }
         }
+        System.out.println("Incorrect Pin");
         return false;
     }
 
@@ -98,9 +97,7 @@ public class ATM {
     }
 
 
-    public void deposit() {
 
-    }
 
     public void transfer() {
 
@@ -113,35 +110,59 @@ public class ATM {
     public void changePIN() {
 
     }
-
-    private boolean withdraw() {
-        System.out.println("Which account would you like to withdraw from: "+c.getAccountsString());
+    private void deposit() {
+        boolean valid = false;
+        System.out.print("Which account would you like to deposit to: " + c.getAccountsString()+": ");
         int account = scan.nextInt();
         Account.types acc = c.getAccounts()[account].getType();
+        while (!valid) {
+            System.out.print("Enter amount to deposit; -1 to cancel: ");
+            int amount = scan.nextDouble();
 
-        System.out.print("Enter amount to withdraw: ");
-        int amount = scan.nextInt();
+            if (amount==-1) {
+                valid = true;
+                continue;
+            }
 
+            if (!(validAmount(amount))) {
+                System.out.println("Amount must be multiple of 5");
+            }
 
-        if (!(validAmount(amount))) {
-            return false;
+            if (c.getAccounts()[account].withdraw(amount)) {
+                System.out.println("Withdraw successful");
+                valid = true;
+            } else {
+                System.out.println("Withdraw failed; Max withdraw is: "+c.getAccounts()[account].getBalance());
+            }
         }
+        mainMenu();
+    }
+    private void withdraw() {
+        boolean valid = false;
+        System.out.print("Which account would you like to withdraw from: " + c.getAccountsString()+": ");
+        int account = scan.nextInt();
+        Account.types acc = c.getAccounts()[account].getType();
+        while (!valid) {
+            System.out.print("Enter amount to withdraw; -1 to cancel: ");
+            int amount = scan.nextInt();
 
+            if (amount==-1) {
+                valid = true;
+                continue;
+            }
 
-        if (c.withdraw(amount, acc)) {
-            System.out.println("Withdraw successful");
-        } else {
-            System.out.println("Withdraw failed");
+            if (!(validAmount(amount))) {
+                System.out.println("Amount must be multiple of 5");
+            }
+
+            if (c.getAccounts()[account].withdraw(amount)) {
+                System.out.println("Withdraw successful");
+                valid = true;
+            } else {
+                System.out.println("Withdraw failed; Max withdraw is: "+c.getAccounts()[account].getBalance());
+            }
         }
-
-
-//        if (validAmount(amount)) {
-//            if (c.withdraw(amount, acc)) {
-//                System.out.println("Withdraw successful");
-//            } else {
-//                System.out.println("Withdraw failed");
-//            }
-//        }
+        mainMenu();
     }
 
 

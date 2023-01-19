@@ -32,22 +32,22 @@ public class Customer {
         return f;
     }
 
-    public boolean withdraw(int amount, String type) {
-        if (type.equals("Saving")) {
-            if (amount > saving.getBalance()) {
-                return false;
-            }
-            saving.withdraw(amount);
-        } else if (type.equals("Checking")) {
-            if (amount > checking.getBalance()) {
-                return false;
-            }
-            checking.withdraw(amount);
-
-        }
-        return true;
-
-    }
+//    public boolean withdraw(int amount, String type) {
+//        if (type.equals("Saving")) {
+//            if (amount > saving.getBalance()) {
+//                return false;
+//            }
+//            saving.withdraw(amount);
+//        } else if (type.equals("Checking")) {
+//            if (amount > checking.getBalance()) {
+//                return false;
+//            }
+//            checking.withdraw(amount);
+//
+//        }
+//        return true;
+//
+//    }
 
 
 }
