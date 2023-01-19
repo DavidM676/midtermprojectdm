@@ -5,7 +5,7 @@ public class Account {
     }
 
 
-    private int balence = 0;
+    private double balence = 0;
 
     private types acc;
 
@@ -21,7 +21,12 @@ public class Account {
         return false;
     }
 
-    public int getBalance() {
+    public boolean deposit(double amount) {
+        balence += amount;
+        return true;
+    }
+
+    public double getBalance() {
         return balence;
     }
 

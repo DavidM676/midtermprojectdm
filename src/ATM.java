@@ -117,22 +117,18 @@ public class ATM {
         Account.types acc = c.getAccounts()[account].getType();
         while (!valid) {
             System.out.print("Enter amount to deposit; -1 to cancel: ");
-            int amount = scan.nextDouble();
+            double amount = scan.nextDouble();
 
             if (amount==-1) {
                 valid = true;
                 continue;
             }
 
-            if (!(validAmount(amount))) {
-                System.out.println("Amount must be multiple of 5");
-            }
-
-            if (c.getAccounts()[account].withdraw(amount)) {
-                System.out.println("Withdraw successful");
+            if (c.getAccounts()[account].deposit(amount)) {
+                System.out.println("Deposit successful");
                 valid = true;
             } else {
-                System.out.println("Withdraw failed; Max withdraw is: "+c.getAccounts()[account].getBalance());
+                System.out.println("Deposit failed");
             }
         }
         mainMenu();
