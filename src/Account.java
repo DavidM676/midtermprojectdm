@@ -5,7 +5,7 @@ public class Account {
     }
 
 
-    private double balence = 0;
+    private double balance = 0;
 
     private types acc;
 
@@ -18,29 +18,31 @@ public class Account {
         acc2.deposit(amount);
         return true;
     }
-    public boolean withdraw(int amount) {
-        if (!(amount>balence)) {
-            balence -= amount;
-            return true;
-        }
-        return false;
-    }
 
     public boolean withdraw(double amount) {
-        if (!(amount>balence)) {
-            balence -= amount;
+        if (!(amount> balance)) {
+            balance -= amount;
             return true;
         }
         return false;
     }
 
+    public boolean withdraw(int amount) {
+        if (!(amount> balance)) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+
     public boolean deposit(double amount) {
-        balence += amount;
+        balance += amount;
         return true;
     }
 
     public double getBalance() {
-        return balence;
+        return balance;
     }
 
     public types getType() {

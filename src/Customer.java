@@ -6,6 +6,7 @@ public class Customer {
     private Account[] accounts = {saving, checking};
     private String name;
     private String pin;
+    private int transactionID = 0;
 
     private boolean authenticated = false;
 
@@ -53,7 +54,18 @@ public class Customer {
         return f;
     }
 
+    public int getTransactionID() {
+        if (!(authenticated)) {
+            return -1;
+        }
 
-
+        return transactionID;
+    }
+    public void newTransaction() {
+        if (authenticated) {
+            authenticated = false;
+            transactionID += 1;
+        }
+    }
 
 }
