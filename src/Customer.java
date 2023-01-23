@@ -7,24 +7,45 @@ public class Customer {
     private String name;
     private String pin;
 
+    private boolean authenticated = false;
+
     public Customer(String pin, String name) {
         this.pin = pin;
         this.name = name;
     }
 
-    public String getPin() {
-        return pin;
+    public boolean authenticate(String pin) {
+        if (this.pin.equals(pin)) {
+            authenticated = true;
+            return true;
+        }
+        return false;
     }
 
-    public String getName() {
-        return name;
+    public void logout() {
+        authenticated = false;
     }
+
+    public void setPin(String newPin) {
+        if (authenticated) {
+            authenticated = false;
+            pin = newPin;
+        }
+    }
+
 
     public Account[] getAccounts() {
-        return accounts;
+        if (authenticated) {
+            return accounts;
+        }
+        return null;
     }
 
     public String getAccountsString() {
+        if (!(authenticated)) {
+            return null;
+        }
+
         String f = "";
         for (int i = 0; i<accounts.length; i++) {
             f += "("+i+")"+accounts[i].getType().name()+" ";
@@ -32,22 +53,7 @@ public class Customer {
         return f;
     }
 
-//    public boolean withdraw(int amount, String type) {
-//        if (type.equals("Saving")) {
-//            if (amount > saving.getBalance()) {
-//                return false;
-//            }
-//            saving.withdraw(amount);
-//        } else if (type.equals("Checking")) {
-//            if (amount > checking.getBalance()) {
-//                return false;
-//            }
-//            checking.withdraw(amount);
-//
-//        }
-//        return true;
-//
-//    }
+
 
 
 }
