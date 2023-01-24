@@ -13,48 +13,6 @@ public class ATM {
 
 
 
-    private void createUser() {
-
-        String pin = "";
-        while (pin.equals("")) {
-            System.out.print(ConsoleColors.BLUE+"Enter a " + ConsoleColors.CYAN_BOLD_BRIGHT+"PIN:" +ConsoleColors.RESET);
-            pin = scan.nextLine();
-        }
-
-        System.out.print(ConsoleColors.BLUE+"Enter your " + ConsoleColors.CYAN_BOLD_BRIGHT+ "name: "+ConsoleColors.RESET);
-        String name = scan.nextLine();
-
-        c = new Customer(pin, name);
-
-
-        System.out.println("Login: ");
-        while (!(authenticate()));
-        mainMenu();
-    }
-
-    private boolean authenticate() {
-        System.out.print(ConsoleColors.BLUE+"Enter " + ConsoleColors.CYAN_BOLD_BRIGHT+"PIN:" +ConsoleColors.RESET);
-        String pin = scan.nextLine();
-        if (c.authenticate(pin)) {
-            return true;
-        }
-        System.out.println(ConsoleColors.RED+"Incorrect Pin"+ConsoleColors.RESET);
-        return false;
-    }
-
-    private int selectAcc(String q) {
-        System.out.print(q + ConsoleColors.CYAN_BOLD_BRIGHT+c.getAccountsString()+": "+ConsoleColors.RESET);
-        int account = scan.nextInt();
-        if (account>=c.getAccounts().length || account<0) {
-            System.out.println(ConsoleColors.RED+"Invalid choice"+ConsoleColors.RESET);
-            return -1;
-        }
-        return account;
-    }
-    private void printLine() {
-        System.out.println("------------------------------------------------------");
-    }
-
 
     private void mainMenu() {
         printLine();
@@ -302,6 +260,49 @@ public class ATM {
 
     }
     }
+
+    private void createUser() {
+
+        String pin = "";
+        while (pin.equals("")) {
+            System.out.print(ConsoleColors.BLUE+"Enter a " + ConsoleColors.CYAN_BOLD_BRIGHT+"PIN:" +ConsoleColors.RESET);
+            pin = scan.nextLine();
+        }
+
+        System.out.print(ConsoleColors.BLUE+"Enter your " + ConsoleColors.CYAN_BOLD_BRIGHT+ "name: "+ConsoleColors.RESET);
+        String name = scan.nextLine();
+
+        c = new Customer(pin, name);
+
+
+        System.out.println("Login: ");
+        while (!(authenticate()));
+        mainMenu();
+    }
+
+    private boolean authenticate() {
+        System.out.print(ConsoleColors.BLUE+"Enter " + ConsoleColors.CYAN_BOLD_BRIGHT+"PIN:" +ConsoleColors.RESET);
+        String pin = scan.nextLine();
+        if (c.authenticate(pin)) {
+            return true;
+        }
+        System.out.println(ConsoleColors.RED+"Incorrect Pin"+ConsoleColors.RESET);
+        return false;
+    }
+
+    private int selectAcc(String q) {
+        System.out.print(q + ConsoleColors.CYAN_BOLD_BRIGHT+c.getAccountsString()+": "+ConsoleColors.RESET);
+        int account = scan.nextInt();
+        if (account>=c.getAccounts().length || account<0) {
+            System.out.println(ConsoleColors.RED+"Invalid choice"+ConsoleColors.RESET);
+            return -1;
+        }
+        return account;
+    }
+    private void printLine() {
+        System.out.println("------------------------------------------------------");
+    }
+
 
 
 
