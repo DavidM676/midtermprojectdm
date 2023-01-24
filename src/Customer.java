@@ -15,6 +15,10 @@ public class Customer {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean authenticate(String pin) {
         if (this.pin.equals(pin)) {
             authenticated = true;
@@ -54,18 +58,31 @@ public class Customer {
         return f;
     }
 
-    public int getTransactionID() {
-        if (!(authenticated)) {
-            return -1;
-        }
-
-        return transactionID;
-    }
-    public void newTransaction() {
+    public int applyChanges(Account a) {
         if (authenticated) {
             authenticated = false;
-            transactionID += 1;
+            a.applyChanges();
+            newTransaction();
+            return transactionID;
         }
+        return -1;
     }
+
+    public int applyChanges(Account a, Account b) {
+        if (authenticated) {
+            authenticated = false;
+            a.applyChanges();
+            b.applyChanges();
+            newTransaction();
+            return transactionID;
+        }
+        return -1;
+    }
+
+
+    private void newTransaction() {
+        transactionID += 1;
+    }
+
 
 }
